@@ -6,3 +6,9 @@ poistuu käytöstä ja sillä on riippuvuuksia useisiin kirjastoihin ja palvelim
 CRUD näkymät tulevat tämän kurssin puitteissa alihankkijatiedolle, työtilaukselle, laskuille ja niiden vastaanottajille. Lisäksi tulee kirjautuminen ja käyttäjänhallinta mikäli se on tarpeellista (oleellista sovelluksen kannalta se ei ole).
 
 
+
+# [Demo](https://tsoha-clientview.herokuapp.com)
+
+
+
+
