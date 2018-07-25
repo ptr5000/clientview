@@ -1,9 +1,11 @@
 from flask import Flask, render_template
 app = Flask(__name__)
 
+
 class Item:
     def __init__(self, name):
         self.name = name
+
 
 nimi = "Essi Esimerkki"
 
@@ -21,9 +23,7 @@ def hello():
 
 @app.route("/demo")
 def content():
-    return render_template("demo.html", nimi=nimi, lista=lista, esineet=esineet)
+    return render_template("index.html", nimi=nimi, lista=lista, esineet=esineet)
 
 if __name__ == "__main__":
     app.run(debug=True)
-
-
