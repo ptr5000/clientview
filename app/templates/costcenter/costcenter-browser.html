@@ -1,4 +1,5 @@
 {% extends "template.html" %}
+{% import "macros.jinja" as macros %}
 
 {% block body %}
 
@@ -23,7 +24,7 @@
             </thead>
             <tbody>
 
-            {% for cc in cost_centers %}
+            {% for cc in cost_centers.items %}
             <tr>
                 <th scope="row">{{cc.id}}</th>
                 <td>{{cc.company_name}}</td>
@@ -35,7 +36,10 @@
             </table>
         </div>
 
+        {{ macros.render_pagination(cost_centers, "costcenter_browser") }}
         </div>
+
+        
 
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
                 Add new cost center

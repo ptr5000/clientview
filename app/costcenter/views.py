@@ -1,20 +1,20 @@
 from flask import render_template, request, abort, redirect, url_for
 from flask_wtf import FlaskForm
+from functools import wraps
 from wtforms.ext.sqlalchemy.orm import model_form
 from app.costcenter.models import CostCenter
 from app import app, db
-
+from functools import wraps
 CostCenterForm = model_form(CostCenter, FlaskForm)
-
 
 @app.route("/costcenter/")
 def costcenter_browser():
     form = CostCenterForm(request.form)
 
-    cost_centers = CostCenter.query.all()
+    cost_centers = CostCenter.query.paginate(max_per_page=5)
 
-    return render_template("costcenter/costcenter-browser.html", 
-                form=form, cost_centers=cost_centers)
+    return render_template("costcenter/costcenter-browser.html",
+                           form=form, cost_centers=cost_centers)
 
 
 
@@ -27,7 +27,7 @@ def costcenter_perform_add():
     if _validate_and_populate_form_model(form, model):
         db.session().add(model)
         db.session().commit()
-        return redirect(url_for('costcenter_browser'))
+        return redirect(url_for("costcenter_browser"))
 
     return _render_costcenter_form(form)
 
