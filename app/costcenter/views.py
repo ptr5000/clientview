@@ -1,4 +1,4 @@
-from flask import render_template, request, abort
+from flask import render_template, request, abort, redirect, url_for
 from flask_wtf import FlaskForm
 from wtforms.ext.sqlalchemy.orm import model_form
 from app.costcenter.models import CostCenter
@@ -8,10 +8,14 @@ CostCenterForm = model_form(CostCenter, FlaskForm)
 
 
 @app.route("/costcenter/")
-def costcenter_add_new_form():
+def costcenter_browser():
     form = CostCenterForm(request.form)
 
-    return _render_costcenter_form(form)
+    cost_centers = CostCenter.query.all()
+
+    return render_template("costcenter/costcenter-browser.html", 
+                form=form, cost_centers=cost_centers)
+
 
 
 @app.route("/costcenter/", methods=["POST"])
@@ -23,6 +27,7 @@ def costcenter_perform_add():
     if _validate_and_populate_form_model(form, model):
         db.session().add(model)
         db.session().commit()
+        return redirect(url_for('costcenter_browser'))
 
     return _render_costcenter_form(form)
 
@@ -55,7 +60,7 @@ def _validate_and_populate_form_model(form, model):
 
 
 def _render_costcenter_form(form):
-    return render_template("costcenter/costcenter-form.html", form=form)
+    return render_template("costcenter/costcenter-form-standalone.html", form=form)
 
 
 def _get_costcenter_model_or_abort(id):
