@@ -1,22 +1,28 @@
 {% extends "template.html" %}
 
 {% block body %}
-  <p>
+<div class="content-wrapper container-fluid px-5 mb-4 trans-03-in-out">
 
-    <form action="{{action}}"
-              method="post">
+  <div class="row">
+    <section class="widget shadow-01 mb-4" id="widget-03">
+      <div class="widget-block">
+        <div class="widget-content">
 
-                {% for field in form %}
+            <form action="{{action}}"
+                  method="post">
 
-                    {{field.label()}}
-                    {{field}}
+                  {% for field in form %}
+                  <div class="form-group">
+                      {{field.label(class="form-control-label")}}
+                      {{field(class="form-control")}}
+                  </div>
+                  {% endfor %}
 
-                {% endfor %}
-
-                <button type="submit">Submit</button>
-
-            </fieldset>
-
-        </form>
-  </p>
+                  <button type="submit">Submit</button>
+            </form>
+          </div>
+      </div>
+  </section>
+</div>
+    
 {% endblock %}

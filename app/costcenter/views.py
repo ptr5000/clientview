@@ -29,7 +29,7 @@ def costcenter_perform_add():
 
 @app.route('/costcenter/<id>')
 def costcenter_edit_existing_form(id=None):
-    model = _get_costcenter_model(id)
+    model = _get_costcenter_model_or_abort(id)
     form = CostCenterForm(request.form, model)
 
     return _render_costcenter_form(form)
@@ -37,7 +37,7 @@ def costcenter_edit_existing_form(id=None):
 
 @app.route('/costcenter/<id>', methods=["POST"])
 def costcenter_perform_update(id=None):
-    model = _get_costcenter_model(id)
+    model = _get_costcenter_model_or_abort(id)
     form = CostCenterForm(request.form, model)
 
     if _validate_and_populate_form_model(form, model):
@@ -58,9 +58,9 @@ def _render_costcenter_form(form):
     return render_template("costcenter/costcenter-form.html", form=form)
 
 
-def _get_costcenter_model(id):
+def _get_costcenter_model_or_abort(id):
     model = CostCenter.query.get(id)
-    
+
     if not model:
         abort(404)
 
