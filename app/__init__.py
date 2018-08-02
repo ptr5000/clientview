@@ -1,9 +1,11 @@
 # pylint: disable=C0413,C0411
 from flask import Flask, redirect, request
 from flask_sqlalchemy import SQLAlchemy
+from flask_bcrypt import Bcrypt
 
 app = Flask(__name__)
 
+bcrypt = Bcrypt(app)
 
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///clientview.db"
 app.config["SQLALCHEMY_ECHO"] = True

@@ -59,10 +59,9 @@ def _add_user_to_db(form):
 
 
 def _login_user(form):
-    user = User.query.filter_by(username=form.username.data, 
-                                password=form.password.data).first()
+    user = User.query.filter_by(username=form.username.data).first()
 
-    if user:
+    if user and user.validate_password(form.password.data):
         login_user(user)
         return True
 
@@ -75,5 +74,4 @@ def _render_forms(form, registration_form, active_tab="login", error=None):
                            reg_form=registration_form,
                            active_tab=active_tab,
                            error=error)
-
 
