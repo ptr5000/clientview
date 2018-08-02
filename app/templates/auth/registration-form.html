@@ -1,0 +1,26 @@
+
+{% for field, errors in reg_form.errors.items() %}
+<div class="alert alert-error">
+    {{ reg_form[field].label }}: {{ ', '.join(errors) }}
+</div>
+{% endfor %}
+
+<form method="POST" action="{{ url_for('auth_handle_registration') }}">
+    {{ reg_form.csrf_token }}
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        {{ reg_form.username.label(class="form-control-label") }}
+        {{ reg_form.username(class="form-control") }}
+      </div>
+      <div class="form-group col-md-12">
+        {{ reg_form.password.label(class="form-control-label") }}
+        {{ reg_form.password(class="form-control") }}
+      </div>
+      <div class="form-group col-md-12">
+        {{ reg_form.password_again.label(class="form-control-label") }}
+        {{ reg_form.password_again(class="form-control") }}
+     </div>
+    </div>
+   
+    <button type="submit" class="btn btn-primary btn-lg btn-block">Sign up</button>
+  </form>

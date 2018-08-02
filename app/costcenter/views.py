@@ -1,5 +1,6 @@
 from flask import render_template, request, abort, redirect, url_for
 from flask_wtf import FlaskForm
+from flask_login import login_required
 from wtforms.ext.sqlalchemy.orm import model_form
 from app.costcenter.models import CostCenter
 from app import app, db
@@ -7,6 +8,7 @@ from app import app, db
 CostCenterForm = model_form(CostCenter, FlaskForm)
 
 @app.route("/costcenter/")
+@login_required
 def costcenter_browser():
     form = CostCenterForm(request.form)
 
@@ -18,6 +20,7 @@ def costcenter_browser():
 
 
 @app.route("/costcenter/", methods=["POST"])
+@login_required
 def costcenter_perform_add():
     model = CostCenter()
 
@@ -32,6 +35,7 @@ def costcenter_perform_add():
 
 
 @app.route('/costcenter/<id>')
+@login_required
 def costcenter_edit_existing_form(id=None):
     model = _get_costcenter_model_or_abort(id)
     form = CostCenterForm(request.form, model)
@@ -40,6 +44,7 @@ def costcenter_edit_existing_form(id=None):
 
 
 @app.route('/costcenter/<id>', methods=["POST"])
+@login_required
 def costcenter_perform_update(id=None):
     model = _get_costcenter_model_or_abort(id)
     form = CostCenterForm(request.form, model)
