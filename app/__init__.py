@@ -1,4 +1,5 @@
 # pylint: disable=C0413,C0411
+import os
 from flask import Flask, redirect, request
 from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
