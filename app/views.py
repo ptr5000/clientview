@@ -4,9 +4,9 @@ from flask_login import login_required
 
 import app.auth.views
 import app.costcenter.views
+import app.subcontractor.views
 
 from . import app
-
 
 @app.route("/")
 @login_required

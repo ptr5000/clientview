@@ -21,11 +21,16 @@ näkee laskun laskunäkymässä.
 ---
 
 Pääkäyttäjän pitää pystyä tekemään hakuja laskunäkymään eri attribuuteilla jotta
-on helppoa selvittää tietyn alihankkijan lähettämät laskut
+on helppoa selvittää tietyn alihankkijan lähettämät laskut ja niiden tilat.
 
 ---
 
+Pääkäyttäjän tulee pystyä hakemaan tuotteisiin liittyvien laskujen ja tilausten yhteenveto, listata ne ja nähdä niiden ostot kokonaisuutena yleisesti tai per kustannuspaikka. Vastaa kysymykseen "kuinka paljon olemme ostaneet tuotetta x, kuka sen on maksanut ja kenelle se on maksettu"
 
+---
 
+Pääkäyttäjän tulee pystyä hakemaan ketkä alihankkijat ovat myyneet mitäkin tuotetta jotta
+voidaan selata helposti ketkä tuotetta toimittavat. Vastaa kysymykseen "mitkä toimittajat toimittavat tuotetta x"
 
+---
 

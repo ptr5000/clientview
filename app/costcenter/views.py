@@ -4,6 +4,7 @@ from flask_login import login_required
 from wtforms.ext.sqlalchemy.orm import model_form
 from app.costcenter.models import CostCenter
 from app import app, db
+from app.utils import validate_and_populate_form_model
 
 CostCenterForm = model_form(CostCenter, FlaskForm)
 
@@ -26,7 +27,7 @@ def costcenter_perform_add():
 
     form = CostCenterForm(request.form, model)
 
-    if _validate_and_populate_form_model(form, model):
+    if validate_and_populate_form_model(form, model):
         db.session().add(model)
         db.session().commit()
         return redirect(url_for("costcenter_browser"))
@@ -49,18 +50,10 @@ def costcenter_perform_update(id=None):
     model = _get_costcenter_model_or_abort(id)
     form = CostCenterForm(request.form, model)
 
-    if _validate_and_populate_form_model(form, model):
+    if validate_and_populate_form_model(form, model):
         db.session().commit()
 
     return _render_costcenter_form(form)
-
-
-def _validate_and_populate_form_model(form, model):
-    if form.validate():
-        form.populate_obj(model)
-        return True
-
-    return False
 
 
 def _render_costcenter_form(form):
