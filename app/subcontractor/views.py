@@ -11,19 +11,20 @@ SubcontractorForm = model_form(Subcontractor, FlaskForm)
 @app.route('/subcontractor/')
 @login_required
 def subcontractor_add_details_form():
-    model = _get_or_create_subcontractor_model()
+    model, created = _get_or_create_subcontractor_model()
     form = SubcontractorForm(request.form, model)
     return _render_subcontractor_form(form)
 
 @app.route("/subcontractor/", methods=["POST"])
 @login_required
 def subcontractor_save_details_form():
-    model = Subcontractor()
+    model, created = _get_or_create_subcontractor_model()
 
     form = SubcontractorForm(request.form, model)
 
     if validate_and_populate_form_model(form, model):
-        db.session().add(model)
+        if created:
+            db.session().add(model)
         db.session().commit()
         return redirect(url_for("subcontractor_add_details_form"))
 
@@ -34,8 +35,9 @@ def _get_or_create_subcontractor_model():
 
     if not model:
         model = Subcontractor(user_id=current_user.get_id())
+        return model, True
 
-    return model
+    return model, False
 
 def _render_subcontractor_form(form):
     return render_template("subcontractor/subcon-edit.html", form=form)
