@@ -1,11 +1,14 @@
 
-from flask_login import login_required, current_user
+from flask_login import current_user
+
+def add_current_user_id_to_model(model):
+    if hasattr(model, "user_id"):
+        model.user_id = current_user.get_id()
 
 
 def validate_and_populate_form_model(form, model):
     if form.validate():
-        if hasattr(model, "user_id"):
-            model.user_id = current_user.get_id()
+        add_current_user_id_to_model(model)
         form.populate_obj(model)
         return True
 

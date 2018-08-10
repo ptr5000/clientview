@@ -44,6 +44,15 @@ def costcenter_edit_existing_form(id=None):
     return _render_costcenter_form(form)
 
 
+@app.route('/costcenter/<id>/delete')
+@login_required
+def costcenter_perform_delete(id=None):
+    model = _get_costcenter_model_or_abort(id)
+    db.session().delete(model)
+    db.session().commit()
+    return redirect(url_for("costcenter_browser"))
+
+
 @app.route('/costcenter/<id>', methods=["POST"])
 @login_required
 def costcenter_perform_update(id=None):
