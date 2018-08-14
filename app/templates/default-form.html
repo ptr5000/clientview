@@ -2,12 +2,15 @@
         <div class="widget-content">
             <form action="{{action}}"
                     method="post">
+                    {{ form.csrf_token }}
     
                     {% for field in form %}
-                    <div class="form-group">
-                        {{field.label(class="form-control-label")}}
-                        {{field(class="form-control")}}
-                    </div>
+                        {% if field.id != "csrf_token" %}
+                            <div class="form-group">
+                                {{field.label(class="form-control-label")}}
+                                {{field(class="form-control")}}
+                            </div>
+                        {% endif %}
                     {% endfor %}
     
                     <button type="submit">Submit</button>

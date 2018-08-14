@@ -2,11 +2,10 @@ from flask import render_template, request, abort, redirect, url_for
 from flask_wtf import FlaskForm
 from flask_login import login_required
 from wtforms.ext.sqlalchemy.orm import model_form
-from app.order.models import Order
+from app.order.models import ProductOrder, Order
 from app import app, db
 from app.utils import validate_and_populate_form_model
-
-OrderForm = model_form(Order, FlaskForm)
+from app.order.forms import OrderForm
 
 @app.route("/order/")
 @login_required
@@ -23,13 +22,11 @@ def order_browser():
 @app.route("/order/", methods=["POST"])
 @login_required
 def order_perform_add():
-    model = Order()
-
-    form = OrderForm(request.form, model)
-
-    if validate_and_populate_form_model(form, model):
-        db.session().add(model)
-        db.session().commit()
+    form = OrderForm(request.form)
+    
+    if form.validate():
+        order_id = _add_order_to_db(form)
+        _add_product_order_to_db(form, order_id)
         return redirect(url_for("order_browser"))
 
     return _render_order_form(form)
@@ -76,3 +73,19 @@ def _get_order_model_or_abort(id):
         abort(404)
 
     return model
+
+
+def _add_product_order_to_db(form, order_id):
+    po = ProductOrder()
+    po.order_id = order_id
+    po.product_id = form.product.data
+    db.session().add(po)
+    db.session().commit()
+
+def _add_order_to_db(form):
+    order = Order()
+    order.status = 1
+    order.subcontractor_id = form.subcontractor.data
+    db.session().add(order)
+    db.session().flush()
+    return order.id
