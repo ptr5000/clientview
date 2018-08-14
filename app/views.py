@@ -5,6 +5,8 @@ from flask_login import login_required
 import app.auth.views
 import app.costcenter.views
 import app.subcontractor.views
+import app.order.views
+import app.product.views
 
 from . import app
 

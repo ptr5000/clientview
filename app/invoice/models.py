@@ -4,10 +4,10 @@ from app.models import BaseAddressModel
 
 class Invoice(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    subcontractor_id = db.Column(
-        db.Integer, db.ForeignKey("subcontractor.id"), nullable=False)
     invoice_sender_details_id = db.Column(
         db.Integer, db.ForeignKey("invoicesenderdetails.id"), nullable=False)
+    order_id = db.Column(
+        db.Integer, db.ForeignKey("order.id"), nullable=False)
     amount = db.Column(db.Integer, nullable=False)
     status = db.Column(db.Integer, nullable=False)
     note = street = db.Column(db.String(255), nullable=True)

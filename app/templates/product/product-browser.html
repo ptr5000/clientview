@@ -9,9 +9,9 @@
         <div class="widget-block">
 
         <header>
-            <h3>Cost Centers</h3>
+            <h3>Products</h3>
             <p class="text-muted">
-                Add or edit new cost centers
+                Add or edit new products
             </p>
         <div class="widget-content py-3">
             <table class="table">
@@ -24,12 +24,12 @@
             </thead>
             <tbody>
 
-            {% for cc in cost_centers.items %}
+            {% for p in products.items %}
             <tr>
-                <th scope="row">{{cc.id}}</th>
-                <td>{{cc.company_name}}</td>
-                <td><a href="{{cc.id}}">Edit</a></td>
-                <td><a href="{{cc.id}}/delete">Delete</a></td>
+                <th scope="row">{{p.id}}</th>
+                <td>{{p.description}}</td>
+                <td><a href="{{p.id}}">Edit</a></td>
+                <td><a href="{{p.id}}/delete">Delete</a></td>
             </tr>
             {% endfor %}
 
@@ -37,13 +37,13 @@
             </table>
         </div>
 
-        {{ macros.render_pagination(cost_centers, "costcenter_browser") }}
+        {{ macros.render_pagination(products, "product_browser") }}
         </div>
 
         
 
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
-                Add new cost center
+                Create new product
               </button>
     </section>
     </div>
@@ -55,7 +55,7 @@
 
         <!-- Modal Header -->
         <div class="modal-header">
-            <h4 class="modal-title">Modal Heading</h4>
+            <h4 class="modal-title">Create new product</h4>
             <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
 
