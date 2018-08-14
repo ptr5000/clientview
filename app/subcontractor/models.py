@@ -1,14 +1,9 @@
 from app import db
+from app.models import BaseAddressModel
 
-class Subcontractor(db.Model):
+class Subcontractor(BaseAddressModel):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey("account.id"), index=True, nullable=False)
-    company_name = db.Column(db.String(255), nullable=False)
-    street = db.Column(db.String(255), nullable=False)
-    city = db.Column(db.String(255), nullable=False)
-    state = db.Column(db.String(255), nullable=True)
-    country = db.Column(db.String(255), nullable=False)
-    zip_code = db.Column(db.String(255), nullable=False)
     vat_code = db.Column(db.String(255), nullable=False)
     is_freelancer = db.Column(db.Boolean(), nullable=True, default=False)
 

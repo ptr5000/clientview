@@ -1,4 +1,5 @@
 from app import db
+from app.models import BaseAddressModel
 
 
 class Invoice(db.Model):
@@ -15,18 +16,12 @@ class Invoice(db.Model):
     modified = db.Column(db.DateTime, default=db.func.current_timestamp(),
                          onupdate=db.func.current_timestamp())
     paypal_address = db.Column(db.String(255), nullable=False)
-    
 
-class InvoiceSenderDetails(db.Model):
+
+class InvoiceSenderDetails(BaseAddressModel):
     """
     Invoice sender details at the time when invoice is sent.
     """
     id = db.Column(db.Integer, primary_key=True)
-    company_name = db.Column(db.String(255), nullable=False)
-    street = db.Column(db.String(255), nullable=False)
-    city = db.Column(db.String(255), nullable=False)
-    state = db.Column(db.String(255), nullable=True)
-    country = db.Column(db.String(255), nullable=False)
-    zip_code = db.Column(db.String(255), nullable=False)
     vat_code = db.Column(db.String(255), nullable=False)
     created = db.Column(db.DateTime, default=db.func.current_timestamp())

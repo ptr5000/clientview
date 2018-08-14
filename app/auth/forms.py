@@ -13,7 +13,7 @@ class RegistrationForm(FlaskForm):
 
     password = PasswordField('Password', [
         validators.DataRequired(),
-        validators.EqualTo('password_again', message='Passwords must match')
+        validators.EqualTo('password_again', message="Passwords must match")
     ])
 
     password_again = PasswordField("Password Again")
