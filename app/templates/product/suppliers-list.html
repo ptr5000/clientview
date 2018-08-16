@@ -1,0 +1,50 @@
+{% extends "template.html" %}
+{% import "macros.jinja" as macros %}
+
+{% block body %}
+
+
+<div class="col-lg-12 mb-3">
+    <section class="widget shadow-01 mb-4" id="widget-01">
+        <div class="widget-block">
+
+        <header>
+            <h3>List of suppliers for {{ product.description }}</h3>
+           
+        <div class="widget-content py-3">
+            <table class="table">
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+
+            {% for s in suppliers %}
+            <tr>
+                <th scope="row">{{s.id}}</th>
+                <td>{{s.company_name}}</td>
+              
+            </tr>
+            {% endfor %}
+
+            </tbody>
+            </table>
+        </div>
+
+        </div>
+
+        
+
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+                Create new product
+              </button>
+    </section>
+    </div>
+
+
+
+
+{% endblock %}

@@ -53,6 +53,15 @@ def product_perform_delete(id=None):
     return redirect(url_for("product_browser"))
 
 
+@app.route('/product/suppliers/<id>', methods=["GET"])
+@login_required
+def product_suppliers(id=None):
+    model = _get_product_model_or_abort(id)
+    return render_template("product/suppliers-list.html", 
+                           product=model, 
+                           suppliers=model.get_all_suppliers())
+
+
 @app.route('/product/<id>', methods=["POST"])
 @login_required
 def product_perform_update(id=None):

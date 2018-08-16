@@ -12,7 +12,7 @@ from app.order.forms import OrderForm
 def order_browser():
     form = OrderForm(request.form)
 
-    orders = Order.query.paginate(max_per_page=5)
+    orders = ProductOrder.query.paginate(max_per_page=5)
 
     return render_template("order/order-browser.html",
                            form=form, orders=orders)
@@ -74,6 +74,13 @@ def _get_order_model_or_abort(id):
 
     return model
 
+def _add_order_to_db(form):
+    order = Order()
+    order.status = 1
+    order.subcontractor_id = form.subcontractor.data
+    db.session().add(order)
+    db.session().flush()
+    return order.id
 
 def _add_product_order_to_db(form, order_id):
     po = ProductOrder()
@@ -82,10 +89,4 @@ def _add_product_order_to_db(form, order_id):
     db.session().add(po)
     db.session().commit()
 
-def _add_order_to_db(form):
-    order = Order()
-    order.status = 1
-    order.subcontractor_id = form.subcontractor.data
-    db.session().add(order)
-    db.session().flush()
-    return order.id
+

@@ -18,18 +18,26 @@
             <thead>
             <tr>
                 <th>Id</th>
-                <th>Name</th>
+                <th>Supplier</th>
+                <th>Product</th>
+                <th>Price</th>
+                
+                <th></th>
                 <th></th>
             </tr>
             </thead>
             <tbody>
 
-            {% for cc in orders.items %}
+            {% for order in orders.items %}
             <tr>
-                <th scope="row">{{cc.id}}</th>
-                <td>{{cc.company_name}}</td>
-                <td><a href="{{cc.id}}">Edit</a></td>
-                <td><a href="{{cc.id}}/delete">Delete</a></td>
+                <th scope="row">{{order.id}}</th>
+                <td>{{order.order.subcontractor.company_name}}</td>
+             
+                <td>{{order.product.description}}</td>
+                <td>{{order.product.price}}€</td>
+                
+                <td><a href="{{order.id}}">Edit</a></td>
+                <td><a href="{{order.id}}/delete">Delete</a></td>
             </tr>
             {% endfor %}
 
