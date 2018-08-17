@@ -17,7 +17,7 @@
             <tr>
                 <th>Id</th>
                 <th>Name</th>
-                <th></th>
+                <th>Total</th>
             </tr>
             </thead>
             <tbody>
@@ -26,6 +26,7 @@
             <tr>
                 <th scope="row">{{s.id}}</th>
                 <td>{{s.company_name}}</td>
+                <td>{{s.total}}€</td>
               
             </tr>
             {% endfor %}
@@ -35,12 +36,6 @@
         </div>
 
         </div>
-
-        
-
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
-                Create new product
-              </button>
     </section>
     </div>
 

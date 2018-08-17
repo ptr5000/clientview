@@ -7,7 +7,16 @@ class Product(db.Model):
     price = db.Column(db.Integer, nullable=False)
 
     def get_all_suppliers(self):
-        stmt = text("SELECT id, company_name FROM subcontractor")
+        stmt = text("SELECT subcontractor.id, "
+                            "subcontractor.company_name, "
+                            "SUM(product.price) "
+                                    "FROM product_order, orderinfo, product, subcontractor "
+                                    "WHERE product_order.product_id = :product_id AND "
+                                        "product_order.order_id = orderinfo.id AND "
+                                        "product.id = product_order.product_id AND "
+                                        "subcontractor.id = orderinfo.subcontractor_id "
+                                        "GROUP BY subcontractor.id").params(product_id=self.id)
+
         res = db.engine.execute(stmt)
-        
-        return map(lambda row: {"id": row[0], "company_name": row[1]}, res)
+
+        return map(lambda row: {"id": row[0], "company_name": row[1], "total": row[2]}, res)
