@@ -3,7 +3,7 @@ from wtforms import PasswordField, StringField, validators
 from app.auth.validators import UsernameValidator
 
 USERNAME_VALIDATOR = validators.Length(min=4, max=25)
-PASSWORD_VALIDATOR = validators.Length(min=8, max=255)
+PASSWORD_VALIDATOR = validators.Length(min=1, max=255)
 
 class LoginForm(FlaskForm):
     username = StringField("Username", [USERNAME_VALIDATOR])
