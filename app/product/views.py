@@ -1,12 +1,10 @@
 from flask import render_template, request, abort, redirect, url_for
-from flask_wtf import FlaskForm
 from flask_login import login_required
-from wtforms.ext.sqlalchemy.orm import model_form
-from app.product.models import Product
 from app import app, db
+from app.product.models import Product
+from app.product.forms import ProductForm
 from app.utils import validate_and_populate_form_model
 
-ProductForm = model_form(Product, FlaskForm)
 
 @app.route("/product/")
 @login_required

@@ -1,5 +1,11 @@
 <div class="widget-block">
         <div class="widget-content">
+            {% for field, errors in form.errors.items() %}
+            <div class="alert alert-error">
+                {{ form[field].label }}: {{ ', '.join(errors) }}
+            </div>
+            {% endfor %}
+            
             <form action="{{action}}"
                     method="post">
                     {{ form.csrf_token }}

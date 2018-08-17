@@ -1,12 +1,10 @@
 from flask import render_template, request, abort, redirect, url_for
-from flask_wtf import FlaskForm
 from flask_login import login_required
-from wtforms.ext.sqlalchemy.orm import model_form
 from app.costcenter.models import CostCenter
+from app.costcenter.forms import CostCenterForm
 from app import app, db
 from app.utils import validate_and_populate_form_model
 
-CostCenterForm = model_form(CostCenter, FlaskForm)
 
 @app.route("/costcenter/")
 @login_required
@@ -17,7 +15,6 @@ def costcenter_browser():
 
     return render_template("costcenter/costcenter-browser.html",
                            form=form, cost_centers=cost_centers)
-
 
 
 @app.route("/costcenter/", methods=["POST"])

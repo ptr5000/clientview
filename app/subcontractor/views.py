@@ -1,12 +1,9 @@
 from flask import render_template, request, redirect, url_for
-from flask_wtf import FlaskForm
 from flask_login import login_required, current_user
-from wtforms.ext.sqlalchemy.orm import model_form
 from app.subcontractor.models import Subcontractor
+from app.subcontractor.forms import SubcontractorForm
 from app import app, db
 from app.utils import validate_and_populate_form_model
-
-SubcontractorForm = model_form(Subcontractor, FlaskForm)
 
 @app.route('/subcontractor/')
 @login_required
