@@ -1,7 +1,10 @@
-from wtforms import ValidationError
+from wtforms import ValidationError, validators
 from app.auth.models import User
 
-class UsernameValidator(object):
+USERNAME_VALIDATOR = validators.Length(min=4, max=25)
+PASSWORD_VALIDATOR = validators.Length(min=1, max=255)
+
+class UsernameTakenValidator(object):
     def __init__(self, message=None):
         self.message = message
 

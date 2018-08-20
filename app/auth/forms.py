@@ -1,9 +1,6 @@
 from flask_wtf import FlaskForm
 from wtforms import PasswordField, StringField, validators
-from app.auth.validators import UsernameValidator
-
-USERNAME_VALIDATOR = validators.Length(min=4, max=25)
-PASSWORD_VALIDATOR = validators.Length(min=1, max=255)
+from app.auth.validators import UsernameTakenValidator, USERNAME_VALIDATOR, PASSWORD_VALIDATOR
 
 class LoginForm(FlaskForm):
     username = StringField("Username", [USERNAME_VALIDATOR])
@@ -12,7 +9,7 @@ class LoginForm(FlaskForm):
 class RegistrationForm(FlaskForm):
     username = StringField("Username", [
         USERNAME_VALIDATOR,
-        UsernameValidator(message="Username is already taken")])
+        UsernameTakenValidator(message="Username is already taken")])
 
     password = PasswordField('Password', [
         PASSWORD_VALIDATOR,

@@ -7,6 +7,7 @@ import app.costcenter.views
 import app.subcontractor.views
 import app.order.views
 import app.product.views
+import app.invoice.views
 
 from . import app
 

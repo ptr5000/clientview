@@ -5,12 +5,12 @@ from app.models import BaseAddressModel
 class Invoice(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     invoice_sender_details_id = db.Column(
-        db.Integer, db.ForeignKey("invoicesenderdetails.id"), nullable=False)
+        db.Integer, db.ForeignKey("invoice_sender_details.id"), nullable=False)
     order_id = db.Column(
-        db.Integer, db.ForeignKey("order.id"), nullable=False)
+        db.Integer, db.ForeignKey("orderinfo.id"), nullable=False)
     amount = db.Column(db.Integer, nullable=False)
     status = db.Column(db.Integer, nullable=False)
-    note = street = db.Column(db.String(255), nullable=True)
+    note = db.Column(db.String(255), nullable=True)
     sent_date = db.Column(db.DateTime, default=db.func.current_timestamp())
     paid_date = db.Column(db.DateTime, nullable=True)
     modified = db.Column(db.DateTime, default=db.func.current_timestamp(),

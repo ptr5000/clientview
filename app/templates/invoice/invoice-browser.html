@@ -1,0 +1,78 @@
+{% extends "template.html" %}
+{% import "macros.jinja" as macros %}
+
+{% block body %}
+
+
+<div class="col-lg-12 mb-3">
+    <section class="widget shadow-01 mb-4" id="widget-01">
+        <div class="widget-block">
+
+        <header>
+            <h3>Your Orders and Invoices</h3>
+            <p class="text-muted">
+                Add or edit new invoice
+            </p>
+        <div class="widget-content py-3">
+            <table class="table">
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+
+            {% for cc in invoices.items %}
+            <tr>
+                <th scope="row">{{cc.id}}</th>
+                <td>{{cc.company_name}}</td>
+                <td><a href="{{cc.id}}">Edit</a></td>
+                <td><a href="{{cc.id}}/delete">Delete</a></td>
+            </tr>
+            {% endfor %}
+
+            </tbody>
+            </table>
+        </div>
+
+        {{ macros.render_pagination(invoices, "invoice_browser") }}
+        </div>
+
+        
+
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+                Add new invoice
+              </button>
+    </section>
+    </div>
+
+
+<div class="modal" id="myModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+        <!-- Modal Header -->
+        <div class="modal-header">
+            <h4 class="modal-title">Invoice</h4>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+
+        <!-- Modal body -->
+        <div class="modal-body">
+            {% include "default-form.html" %}
+        </div>
+
+        <!-- Modal footer -->
+        <div class="modal-footer">
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+        </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock %}
