@@ -1,0 +1,78 @@
+{% extends "template.html" %}
+{% import "macros.jinja" as macros %}
+
+{% block body %}
+
+
+Invoice <strong>01/01/01/2018</strong> <strong>Status:</strong> Pending
+<h6>From:</h6><strong>Webz Poland</strong> Madalinskiego 8 71-101 Szczecin, Poland Email: info@webz.com.pl Phone: +48 444 666 3333
+<h6>To:</h6><strong>Bob Mart</strong> Attn: Daniel Marek 43-190 Mikolow, Poland Email: marek@daniel.com Phone: +48 123 456 789
+<table>
+  <tbody>
+    <tr>
+      <th>#</th>
+      <th>Item</th>
+      <th>Description</th>
+      <th>Unit Cost</th>
+      <th>Qty</th>
+      <th>Total</th>
+    </tr>
+  </tbody>
+  <tbody>
+    <tr>
+      <td>1</td>
+      <td>Origin License</td>
+      <td>Extended License</td>
+      <td>$999,00</td>
+      <td>1</td>
+      <td>$999,00</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>Custom Services</td>
+      <td>Instalation and Customization (cost per hour)</td>
+      <td>$150,00</td>
+      <td>20</td>
+      <td>$3.000,00</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>Hosting</td>
+      <td>1 year subcription</td>
+      <td>$499,00</td>
+      <td>1</td>
+      <td>$499,00</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>Platinum Support</td>
+      <td>1 year subcription 24/7</td>
+      <td>$3.999,00</td>
+      <td>1</td>
+      <td>$3.999,00</td>
+    </tr>
+  </tbody>
+</table>
+<table>
+  <tbody>
+    <tr>
+      <td><strong>Subtotal</strong></td>
+      <td>$8.497,00</td>
+    </tr>
+    <tr>
+      <td><strong>Discount (20%)</strong></td>
+      <td>$1,699,40</td>
+    </tr>
+    <tr>
+      <td><strong>VAT (10%)</strong></td>
+      <td>$679,76</td>
+    </tr>
+    <tr>
+      <td><strong>Total</strong></td>
+      <td><strong>$7.477,36</strong></td>
+    </tr>
+  </tbody>
+</table>
+
+
+{% endblock %}

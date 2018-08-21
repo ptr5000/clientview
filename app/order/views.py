@@ -1,6 +1,7 @@
 from flask import render_template, request, abort, redirect, url_for
 from flask_wtf import FlaskForm
 from flask_login import login_required
+
 from wtforms.ext.sqlalchemy.orm import model_form
 from app.order.models import ProductOrder, Order
 from app import app, db
@@ -88,5 +89,4 @@ def _add_product_order_to_db(form, order_id):
     po.product_id = form.product.data
     db.session().add(po)
     db.session().commit()
-
 

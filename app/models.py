@@ -1,6 +1,6 @@
 from app import db
 from wtforms import validators
-
+from copy import deepcopy
 
 class BaseAddressModel(db.Model):
     __abstract__ = True
