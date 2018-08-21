@@ -18,6 +18,7 @@
             <thead>
             <tr>
                 <th>Id</th>
+                <th>Cost Center</th>
                 <th>Supplier</th>
                 <th>Product</th>
                 <th>Price</th>
@@ -31,6 +32,7 @@
             {% for order in orders.items %}
             <tr>
                 <th scope="row">{{order.id}}</th>
+                <td>{{order.order.cost_center.company_name}}</td>
                 <td>{{order.order.subcontractor.company_name}}</td>
              
                 <td>{{order.product.description}}</td>

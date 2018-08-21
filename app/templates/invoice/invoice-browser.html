@@ -18,10 +18,9 @@
             <thead>
             <tr>
                 <th>Id</th>
-                <th>Name</th>
+                <th>Product</th>
                 <th>Created</th>
-                <th>Status</th>
-                <th></th>
+                 <th></th>
             </tr>
             </thead>
             <tbody>
@@ -32,9 +31,13 @@
                 <th scope="row">{{po.id}}</th>
                 <td>{{po.product.description}}</td>
                 <td>{{po.order.created}}</td>
-                <td>{{po.invoice}}</td>
-                
-                <td><a href="{{po.id}}/new">Invoice this order</a></td>
+                {% if not po.invoice %}
+                    <td><a href="{{po.id}}/new" class="btn btn-success btn-sm">Create Invoice</a></td>  
+                {% else %}
+                    <td><a href="{{po.id}}/" class="btn btn-primary btn-sm">View Invoice</a></td>
+                {% endif %}
+
+                <td></td>
             </tr>
             {% endfor %}
 
@@ -45,11 +48,6 @@
         {{ macros.render_pagination(orders, "invoice_browser") }}
         </div>
 
-        
-
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
-                Add new invoice
-              </button>
     </section>
     </div>
 

@@ -2,6 +2,7 @@ from flask_wtf import FlaskForm
 from wtforms import SelectField, validators
 from app.subcontractor.models import Subcontractor
 from app.product.models import Product
+from app.costcenter.models import CostCenter
 
 class SubcontractorIterable(object):
     def __iter__(self):
@@ -14,7 +15,13 @@ class ProductIterable(object):
         return map(lambda s: (s.id, "{} ({}€)"
                               .format(s.description, s.price)), products)
 
+class CostCenterIterable(object):
+    def __iter__(self):
+        cost_centers = CostCenter.query.all()
+        return map(lambda s: (s.id, s.company_name), cost_centers)
+
 class OrderForm(FlaskForm):
+    cost_center = SelectField("Cost center", coerce=int, choices=CostCenterIterable())
     subcontractor = SelectField("Subcontractor", coerce=int, choices=SubcontractorIterable())
     product = SelectField("Product", coerce=int, choices=ProductIterable())
 

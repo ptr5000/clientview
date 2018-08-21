@@ -8,7 +8,10 @@ class Order(db.Model):
     status = db.Column(db.Integer, nullable=False)
     subcontractor_id = db.Column(
         db.Integer, db.ForeignKey("subcontractor.id"), nullable=False)
+    cost_center_id = db.Column(
+        db.Integer, db.ForeignKey("cost_center.id"), nullable=False)
     subcontractor = db.relationship("Subcontractor")
+    cost_center = db.relationship("CostCenter")
     created = db.Column(db.DateTime, default=db.func.current_timestamp())
 
 class ProductOrder(db.Model):

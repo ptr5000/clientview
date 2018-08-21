@@ -3,76 +3,121 @@
 
 {% block body %}
 
+<div class="content-wrapper">
+  
+        <div class="content-body">
+          <section class="card">
+            <div id="invoice-template" class="card-body">
+              <!-- Invoice Company Details -->
+              <div id="invoice-company-details" class="row">
+                <div class="col-md-6 col-sm-12 text-center text-md-left">
+                  <div class="media">
+                    <div class="media-body">
+                      <ul class="px-0 list-unstyled">
+                        <li class="text-bold-800">{{ invoice.invoice_sender.company_name }}</li>
+                        <li>{{ invoice.invoice_sender.street }}</li>
+                        <li>{{ invoice.invoice_sender.zip_code }} {{ invoice.invoice_sender.city }}</li>
+                        <li>{{ invoice.invoice_sender.state }}</li>
+                        <li>{{ invoice.invoice_sender.country }}</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6 col-sm-12 text-center text-md-right">
+                  <h2>INVOICE</h2>
+                  <p class="pb-3"># INV-000{{ invoice.id }}</p>
+                
+                </div>
+              </div>
+              <!--/ Invoice Company Details -->
+              <!-- Invoice Customer Details -->
+              <div id="invoice-customer-details" class="row pt-2">
+                <div class="col-sm-12 text-center text-md-left">
+                  <p class="text-muted">Bill To</p>
+                </div>
+                <div class="col-md-6 col-sm-12 text-center text-md-left">
+                  <ul class="px-0 list-unstyled">
+                    <li class="text-bold-800">{{ invoice.cost_center.company_name }}</li>
+                    <li>{{ invoice.cost_center.street }}</li>
+                    <li>{{ invoice.cost_center.zip_code }} {{ invoice.cost_center.city }}</li>
+                    <li>{{ invoice.cost_center.state }}</li>
+                    <li>{{ invoice.cost_center.country }}</li>
+                  </ul>
+                </div>
+                <div class="col-md-6 col-sm-12 text-center text-md-right">
+                  <p>
+                    <span class="text-muted">Invoice Date:</span> {{ invoice.sent_date.strftime('%Y-%m-%d') }} </p>
+                  <p>
+                    <span class="text-muted">Status:</span>
+                    {% if invoice.is_sent() %}
+                        Sent 
+                    {% else %}
+                        Pending
+                    {% endif %}
+                  </p>
 
-Invoice <strong>01/01/01/2018</strong> <strong>Status:</strong> Pending
-<h6>From:</h6><strong>Webz Poland</strong> Madalinskiego 8 71-101 Szczecin, Poland Email: info@webz.com.pl Phone: +48 444 666 3333
-<h6>To:</h6><strong>Bob Mart</strong> Attn: Daniel Marek 43-190 Mikolow, Poland Email: marek@daniel.com Phone: +48 123 456 789
-<table>
-  <tbody>
-    <tr>
-      <th>#</th>
-      <th>Item</th>
-      <th>Description</th>
-      <th>Unit Cost</th>
-      <th>Qty</th>
-      <th>Total</th>
-    </tr>
-  </tbody>
-  <tbody>
-    <tr>
-      <td>1</td>
-      <td>Origin License</td>
-      <td>Extended License</td>
-      <td>$999,00</td>
-      <td>1</td>
-      <td>$999,00</td>
-    </tr>
-    <tr>
-      <td>2</td>
-      <td>Custom Services</td>
-      <td>Instalation and Customization (cost per hour)</td>
-      <td>$150,00</td>
-      <td>20</td>
-      <td>$3.000,00</td>
-    </tr>
-    <tr>
-      <td>3</td>
-      <td>Hosting</td>
-      <td>1 year subcription</td>
-      <td>$499,00</td>
-      <td>1</td>
-      <td>$499,00</td>
-    </tr>
-    <tr>
-      <td>4</td>
-      <td>Platinum Support</td>
-      <td>1 year subcription 24/7</td>
-      <td>$3.999,00</td>
-      <td>1</td>
-      <td>$3.999,00</td>
-    </tr>
-  </tbody>
-</table>
-<table>
-  <tbody>
-    <tr>
-      <td><strong>Subtotal</strong></td>
-      <td>$8.497,00</td>
-    </tr>
-    <tr>
-      <td><strong>Discount (20%)</strong></td>
-      <td>$1,699,40</td>
-    </tr>
-    <tr>
-      <td><strong>VAT (10%)</strong></td>
-      <td>$679,76</td>
-    </tr>
-    <tr>
-      <td><strong>Total</strong></td>
-      <td><strong>$7.477,36</strong></td>
-    </tr>
-  </tbody>
-</table>
+                    
+                 </div>
+              </div>
+              <!--/ Invoice Customer Details -->
+              <!-- Invoice Items Details -->
+              <div id="invoice-items-details" class="pt-2">
+                <div class="row">
+                  <div class="table-responsive col-sm-12">
+                    <table class="table">
+                      <thead>
+                        <tr>
+                          <th>#</th>
+                          <th>Item &amp; Description</th>
+                          <th class="text-right">Amount</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <th scope="row">1</th>
+                          <td>
+                            <p>{{ invoice.note }} </p>
+                           </td>
+                          <td class="text-right">{{ invoice.amount }}€</td>
+                        </tr>
+                        
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+               
+                  <div class="col-md-5 col-sm-12">
+                    <p class="lead">Total due</p>
+                    <div class="table-responsive">
+                      <table class="table">
+                        <tbody>
+                          <tr>
+                            <td>Sub Total</td>
+                            <td class="text-right">{{ invoice.amount }}&euro;</td>
+                          </tr>
+                          <tr>
+                            <td>TAX (0%)</td>
+                            <td class="text-right">0€ (reverse charge)</td>
+                          </tr>
+                          <tr>
+                            <td class="text-bold-800">Total</td>
+                            <td class="text-bold-800 text-right"> {{ invoice.amount }}&euro;</td>
+                          </tr>
+                        
+                        </tbody>
+                      </table>
 
+                    {% if not invoice.is_sent() %}
+                      <a href="send" class="btn btn-primary btn-lg my-1"><i class="fa fa-paper-plane-o"></i> Send Invoice</a>
+                    {% endif %}
+                    </div>
+                 
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
 
 {% endblock %}
