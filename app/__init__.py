@@ -12,7 +12,7 @@ if os.environ.get("HEROKU"):
     app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get("DATABASE_URL")
 else:
     app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///clientview.db"  
-    app.config["SQLALCHEMY_ECHO"] = True
+    app.config["SQLALCHEMY_ECHO"] = False
 
 db = SQLAlchemy(app)
 
@@ -42,3 +42,7 @@ def unauthorized_callback():
     return redirect('/auth/login?next=' + request.path)
 
 db.create_all()
+
+from app.auth.models import User, Roles
+if db.session().query(User).count() == 0:
+    User.create_user("admin", "1", Roles.ADMIN)

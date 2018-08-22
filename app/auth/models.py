@@ -1,10 +1,20 @@
-from enum import Enum
+from enum import IntEnum
 from app import db
 from app import bcrypt
 
-class Roles(Enum):
+class Roles(IntEnum):
     DEFAULT = 0
     ADMIN = 1000
+
+class Role(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(
+        db.Integer, db.ForeignKey("account.id"), nullable=False)
+    role = db.Column(db.Integer, nullable=False, default=Roles.DEFAULT)
+
+    def __init__(self, user_id, role):
+        self.user_id = user_id
+        self.role = role
 
 class User(db.Model):
     __tablename__ = "account"
@@ -15,8 +25,19 @@ class User(db.Model):
                          onupdate=db.func.current_timestamp())
 
     name = db.Column(db.String(144), nullable=True)
-    username = db.Column(db.String(144), nullable=False)
+    username = db.Column(db.String(144), nullable=False, unique=True)
     password = db.Column(db.String(144), nullable=False)
+
+    @staticmethod
+    def create_user(username, password, role=Roles.DEFAULT):
+        user = User(username, password)
+        db.session().add(user)
+        db.session().flush()
+
+        db.session().add(Role(user.id, role))
+        db.session().commit()
+
+        return user
 
     def __init__(self, username, password):
         self.username = username
@@ -48,4 +69,4 @@ class User(db.Model):
     
 
     def roles(self):
-        return [Roles.ADMIN]
+        return map(lambda r: r.role, Role.query.filter_by(user_id=self.id).all())
