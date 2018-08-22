@@ -2,9 +2,11 @@ from enum import IntEnum
 from app import db
 from app.models import BaseAddressModel
 
+
 class InvoiceStatus(IntEnum):
     pending = 0
     sent = 1
+
 
 class Invoice(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -25,9 +27,16 @@ class Invoice(db.Model):
     cost_center = db.relationship("CostCenter", lazy=True)
     invoice_sender = db.relationship("InvoiceSenderDetails", lazy=True)
 
+
     def is_sent(self):
         return self.status == InvoiceStatus.sent
-    
+
+
+    def send(self):
+        self.status = InvoiceStatus.sent
+        db.session().commit()
+
+
     @staticmethod
     def create_invoice_from_product_order(product_order):
         from app.subcontractor.models import Subcontractor
@@ -45,7 +54,7 @@ class Invoice(db.Model):
         invoice.amount = product_order.product.price
         invoice.status = InvoiceStatus.pending
         invoice.note = product_order.product.description
-        invoice.paypal_address = "test@example.com"
+        invoice.paypal_address = subcon.paypal_address
 
         db.session().add(invoice)
         db.session().commit()
@@ -55,7 +64,7 @@ class Invoice(db.Model):
 
 class InvoiceSenderDetails(BaseAddressModel):
     """
-    Invoice sender details at the time when invoice is sent.
+    Invoice sender details at the time when invoice was sent.
     """
     id = db.Column(db.Integer, primary_key=True)
     vat_code = db.Column(db.String(255), nullable=False)

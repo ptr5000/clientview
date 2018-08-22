@@ -1,10 +1,9 @@
 from flask import render_template, abort, redirect, url_for
 from flask_login import login_required, current_user
-from app.invoice.models import Invoice, InvoiceStatus
+from app.invoice.models import Invoice
 from app.order.models import ProductOrder, Order
 from app.subcontractor.models import Subcontractor
-from app import app, db
-
+from app import app
 
 
 @app.route("/invoice/")
@@ -39,10 +38,10 @@ def invoice_create_new(id=None):
 def invoice_send(id=None):
     model = _get_product_order_or_abort(id)
     invoice = _get_invoice_or_abort(model.id)
-    invoice.status = InvoiceStatus.sent
-    db.session().commit()
+    invoice.send()
 
     return redirect_to_invoice_view(id)
+
 
 def _get_product_order_or_abort(id):
     model = ProductOrder.query.get(id)
@@ -52,6 +51,7 @@ def _get_product_order_or_abort(id):
 
     return model
 
+
 def _get_invoice_or_abort(product_order_id):
     invoice = Invoice.query.filter_by(product_order_id=product_order_id).first()
 
@@ -59,6 +59,7 @@ def _get_invoice_or_abort(product_order_id):
         abort(404)
 
     return invoice
+
 
 def _get_orders_with_invoices(subcontractor_id):
     return (ProductOrder.query
@@ -69,6 +70,7 @@ def _get_orders_with_invoices(subcontractor_id):
 
 def _render_invoice(invoice):
     return render_template("invoice/invoice.html", invoice=invoice)
+
 
 def redirect_to_invoice_view(id):
     return redirect(url_for("invoice_view", id=id))

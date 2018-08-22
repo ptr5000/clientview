@@ -1,5 +1,10 @@
+from enum import Enum
 from app import db
 from app import bcrypt
+
+class Roles(Enum):
+    DEFAULT = 0
+    ADMIN = 1000
 
 class User(db.Model):
     __tablename__ = "account"
@@ -17,17 +22,30 @@ class User(db.Model):
         self.username = username
         self.password = bcrypt.generate_password_hash(password, 8)
 
+
     def validate_password(self, password):
         return bcrypt.check_password_hash(self.password, password)
-    
+
+
     def get_id(self):
         return self.id
+
 
     def is_active(self):
         return True
 
+
     def is_anonymous(self):
         return False
 
+
     def is_authenticated(self):
         return True
+
+
+    def is_admin(self):
+        return Roles.ADMIN in self.roles()
+    
+
+    def roles(self):
+        return [Roles.ADMIN]

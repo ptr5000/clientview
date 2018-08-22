@@ -16,6 +16,13 @@ else:
 
 db = SQLAlchemy(app)
 
+from flask_login import LoginManager
+login_manager = LoginManager()
+login_manager.setup_app(app)
+
+login_manager.login_view = "auth_login_form"
+login_manager.login_message = "Please login to use this functionality."
+
 from app import views
 
 from os import urandom

@@ -1,13 +1,14 @@
 from flask import render_template, request, abort, redirect, url_for
-from flask_login import login_required
 from app import app, db
 from app.product.models import Product
+from app.auth.decorators import login_required
+from app.auth.models import Roles
 from app.product.forms import ProductForm
 from app.utils import validate_and_populate_form_model
 
 
 @app.route("/product/")
-@login_required
+@login_required(Roles.ADMIN)
 def product_browser():
     form = ProductForm(request.form)
 
@@ -18,7 +19,7 @@ def product_browser():
 
 
 @app.route("/product/", methods=["POST"])
-@login_required
+@login_required(Roles.ADMIN)
 def product_perform_add():
     model = Product()
 
@@ -33,7 +34,7 @@ def product_perform_add():
 
 
 @app.route('/product/<id>')
-@login_required
+@login_required(Roles.ADMIN)
 def product_edit_existing_form(id=None):
     model = _get_product_model_or_abort(id)
     form = ProductForm(request.form, model)
@@ -42,7 +43,7 @@ def product_edit_existing_form(id=None):
 
 
 @app.route('/product/<id>/delete')
-@login_required
+@login_required(Roles.ADMIN)
 def product_perform_delete(id=None):
     model = _get_product_model_or_abort(id)
     db.session().delete(model)
@@ -52,7 +53,7 @@ def product_perform_delete(id=None):
 
 
 @app.route('/product/suppliers/<id>', methods=["GET"])
-@login_required
+@login_required(Roles.ADMIN)
 def product_suppliers(id=None):
     model = _get_product_model_or_abort(id)
 
@@ -62,7 +63,7 @@ def product_suppliers(id=None):
 
 
 @app.route('/product/<id>', methods=["POST"])
-@login_required
+@login_required(Roles.ADMIN)
 def product_perform_update(id=None):
     model = _get_product_model_or_abort(id)
     form = ProductForm(request.form, model)
