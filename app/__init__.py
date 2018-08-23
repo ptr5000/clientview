@@ -46,3 +46,5 @@ db.create_all()
 from app.auth.models import User, Roles
 if db.session().query(User).count() == 0:
     User.create_user("admin", "1", Roles.ADMIN)
+    User.create_user("testco", "1", Roles.DEFAULT)
+    User.create_user("acme", "1", Roles.DEFAULT)

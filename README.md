@@ -7,8 +7,19 @@ CRUD näkymät tulevat tämän kurssin puitteissa alihankkijatiedolle, työtilau
 
 # [Demo](https://tsoha-clientview.herokuapp.com)
 
+Testitunnukset:
+
+admin - admin tunnuksella voi hallita tuotteita ja vastaanottaa laskuja
+testco - testco firman laskutustunnus
+acme - acme firman laskutustunnus
+
+Salasana kaikkiin on '1'
+
+
+
 
 - [Tietokantakaavio](https://raw.githubusercontent.com/ptr5000/clientview/master/docs/clientview.png)
 - [Käyttäjätarinat](https://github.com/ptr5000/clientview/blob/master/docs/tarinat.md)
+
 
 

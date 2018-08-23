@@ -20,8 +20,7 @@ näkee laskun laskunäkymässä.
 
 ---
 
-Pääkäyttäjän pitää pystyä tekemään hakuja laskunäkymään eri attribuuteilla jotta
-on helppoa selvittää tietyn alihankkijan lähettämät laskut ja niiden tilat.
+Pääkäyttäjän pitää pystyä hakemaan laskunäkymästä myös kaikki alihankkijan tiedot, laskujen yhteissumma sekä käyttäjätiedot. 
 
 ---
 
