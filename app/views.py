@@ -1,6 +1,6 @@
 # pylint: disable=W0611
-from flask import render_template
-from flask_login import login_required
+from flask import render_template, redirect, url_for
+from flask_login import login_required, current_user
 
 import app.auth.views
 import app.costcenter.views
@@ -14,4 +14,7 @@ from . import app
 @app.route("/")
 @login_required
 def index():
-    return render_template("index.html")
+    if current_user.is_admin():
+        return redirect(url_for("invoice_inbox"))
+    else:
+        return redirect(url_for("invoice_browser"))

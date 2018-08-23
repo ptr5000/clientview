@@ -4,7 +4,7 @@ from app.product.models import Product
 from app.auth.decorators import login_required
 from app.auth.models import Roles
 from app.product.forms import ProductForm
-from app.utils import validate_and_populate_form_model
+from app.utils import validate_and_populate_form_model, render_default_row_view
 
 
 @app.route("/product/")
@@ -35,12 +35,13 @@ def product_perform_add():
 
 @app.route('/product/<id>')
 @login_required(Roles.ADMIN)
+def product_view(id=None):
+    return render_default_row_view(_create_product_form(id))
+
+@app.route('/product/<id>/edit')
+@login_required(Roles.ADMIN)
 def product_edit_existing_form(id=None):
-    model = _get_product_model_or_abort(id)
-    form = ProductForm(request.form, model)
-
-    return _render_product_form(form)
-
+    return _render_product_form(_create_product_form(id))
 
 @app.route('/product/<id>/delete')
 @login_required(Roles.ADMIN)
@@ -85,3 +86,8 @@ def _get_product_model_or_abort(id):
         abort(404)
 
     return model
+
+def _create_product_form(id):
+    model = _get_product_model_or_abort(id)
+    form = ProductForm(request.form, model)
+    return form

@@ -1,0 +1,24 @@
+{% extends "template.html" %}
+
+{% block body %}
+<div class="content-wrapper container-fluid px-5 mb-4 trans-03-in-out">
+
+  <div class="row">
+    <section class="widget shadow-01 mb-4" id="widget-03">
+            <div class="widget-block">
+                <div class="widget-content">
+                    {% for field in form %}
+                        {% if field.id != "csrf_token" %}
+                            <div class="form-group">
+                                <strong>{{field.label(class="form-control-label")}}</strong>
+                                <p>{{field.data}}</p>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+    </section>
+</div>
+    
+{% endblock %}
+

@@ -13,7 +13,7 @@ from app.auth.models import Roles
 def order_browser():
     form = OrderForm(request.form)
 
-    orders = Order.query.join(ProductOrder).paginate(max_per_page=5)
+    orders = Order.query.paginate(max_per_page=5)
 
     return render_template("order/order-browser.html",
                            form=form, orders=orders)

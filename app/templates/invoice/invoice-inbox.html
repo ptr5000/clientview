@@ -1,0 +1,58 @@
+{% extends "template.html" %}
+{% import "macros.jinja" as macros %}
+
+{% block body %}
+
+
+<div class="col-lg-12 mb-3">
+    <section class="widget shadow-01 mb-4" id="widget-01">
+        <div class="widget-block">
+
+        <header>
+            <h3>Received Invoices</h3>
+            <p class="text-muted">
+                Invoices you've received from your suppliers.
+            </p>
+        <div class="widget-content py-3">
+            <table class="table">
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>Sent</th>
+                <th>From</th>
+                <th>To</th>
+                <th>Total</th>
+                 <th></th>
+            </tr>
+            </thead>
+            <tbody>
+
+            {% for invoice in invoices.items %}
+
+            <tr>
+                <th scope="row">{{invoice.id}}</th>
+                <td>{{invoice.sent_date}}</td>
+                <td>{{invoice.sender.company_name}}</td>
+                <td>{{invoice.cost_center.company_name}}</td>
+                <td>{{invoice.amount}}&euro;</td>
+
+                <td><a href="/invoice/{{invoice.id}}">View</a></a></td>
+            </tr>
+            {% endfor %}
+
+            </tbody>
+            </table>
+        </div>
+
+        {{ macros.render_pagination(invoices, "invoice_inbox") }}
+        </div>
+
+    </section>
+    </div>
+
+
+
+
+
+
+{% endblock %}

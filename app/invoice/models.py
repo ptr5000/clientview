@@ -24,7 +24,7 @@ class Invoice(db.Model):
                          onupdate=db.func.current_timestamp())
     paypal_address = db.Column(db.String(255), nullable=False)
     cost_center = db.relationship("CostCenter", lazy=True)
-    invoice_sender = db.relationship("InvoiceSenderDetails", lazy=True)
+    sender = db.relationship("InvoiceSenderDetails", lazy=True)
 
 
     def is_sent(self):

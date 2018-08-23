@@ -61,53 +61,67 @@
         <nav class="sidebar-nav">
           <!-- Sidebar Menu -->
           {% if current_user.is_admin() %}
+          
+          <ul id="sidebarNav" class="nav nav-dark flex-column">
+            
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('invoice_inbox') }}">
+                <i class="fa fa-inbox" aria-hidden="true"></i>
+                <span class="d-none d-lg-inline">Inbox</span>
+              </a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('order_browser') }}">
+                  <i class="fa fa-share" aria-hidden="true"></i>
+                  <span class="d-none d-lg-inline">Orders</span>
+                </a>
+              </li>
+
+          </ul>
+
           <div class="mb-1 text-uppercase d-none d-lg-block text-muted">
-            <small>Admin</small>
+            <small>Settings</small>
           </div>
           <ul id="sidebarNav" class="nav nav-dark flex-column">
            
+           
+                
             <li class="nav-item">
-              <a class="nav-link" href="/costcenter/">
-                <i class="fa fa-table" aria-hidden="true"></i>
+              <a class="nav-link" href="{{ url_for('costcenter_browser') }}">
+                <i class="fa fa-building" aria-hidden="true"></i>
                 <span class="d-none d-lg-inline">Cost Centers</span>
               </a>
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" href="/product/">
-                  <i class="fa fa-table" aria-hidden="true"></i>
+                <a class="nav-link" href="{{ url_for('product_browser') }}">
+                  <i class="fa fa-shopping-bag" aria-hidden="true"></i>
                   <span class="d-none d-lg-inline">Products</span>
                 </a>
               </li>
 
-            <li class="nav-item">
-                <a class="nav-link" href="/order/">
-                  <i class="fa fa-table" aria-hidden="true"></i>
-                  <span class="d-none d-lg-inline">Orders</span>
-                </a>
-              </li>
-            
-          
           </ul>
           {% else %}
           <div class="mt-4 mb-1 text-uppercase d-none d-lg-block text-muted">
             <small>Invoicing</small>
           </div>
           <ul id="sidebarNav2" class="nav nav-dark flex-column">
-         
+              <li class="nav-item">
+                  <a class="nav-link" href="/invoice/">
+                    <i class="fa fa-share" aria-hidden="true"></i>
+                    <span class="d-none d-lg-inline">Send Invoices</span>
+                  </a>
+              </li>
+              
               <li class="nav-item">
                   <a class="nav-link" href="/subcontractor/">
-                    <i class="fa fa-table" aria-hidden="true"></i>
+                    <i class="fa fa-info-circle" aria-hidden="true"></i>
                     <span class="d-none d-lg-inline">Edit My Details</span>
                   </a>
                 </li>
 
-                <li class="nav-item">
-                    <a class="nav-link" href="/invoice/">
-                      <i class="fa fa-table" aria-hidden="true"></i>
-                      <span class="d-none d-lg-inline">Manage and Send Invoices</span>
-                    </a>
-                </li>
+             
           </ul>
           {% endif %}
           <!-- /Sidebar Menu -->
