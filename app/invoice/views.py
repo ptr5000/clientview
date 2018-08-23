@@ -11,7 +11,10 @@ from app import app
 @app.route("/invoice/inbox/")
 @login_required(Roles.ADMIN)
 def invoice_inbox():
-    invoices = Invoice.query.filter_by(status=int(InvoiceStatus.sent)).order_by(Invoice.sent_date).paginate(max_per_page=5)
+    invoices = (Invoice.query
+                .filter_by(status=int(InvoiceStatus.sent))
+                .order_by(Invoice.sent_date)
+                .paginate(max_per_page=5))
 
     return render_template("invoice/invoice-inbox.html", invoices=invoices)
 

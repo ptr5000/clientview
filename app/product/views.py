@@ -58,7 +58,7 @@ def product_perform_delete(id=None):
 def product_suppliers(id=None):
     product = _get_product_or_abort(id)
 
-    return render_template("product/suppliers-list.html", 
+    return render_template("product/suppliers-list.html",
                            product=product, 
                            suppliers=product.get_all_suppliers())
 

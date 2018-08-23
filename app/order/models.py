@@ -13,7 +13,7 @@ class Order(db.Model):
                                db.ForeignKey("cost_center.id",
                                              onupdate="CASCADE",
                                              ondelete="CASCADE"),
-                                nullable=False)
+                               nullable=False)
     created = db.Column(db.DateTime, default=db.func.current_timestamp())
     subcontractor = db.relationship("Subcontractor")
     cost_center = db.relationship("CostCenter")

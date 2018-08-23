@@ -67,7 +67,7 @@ class User(db.Model):
 
     def is_admin(self):
         return Roles.ADMIN in self.roles()
-    
+
 
     def roles(self):
         return map(lambda r: r.role, Role.query.filter_by(user_id=self.id).all())

@@ -13,20 +13,20 @@ class Subcontractor(BaseAddressModel):
     @staticmethod
     def get_details(id):
         stmt = text("SELECT subcontractor.company_name, subcontractor.street, "
-                            "subcontractor.city, subcontractor.state, "
-                            "subcontractor.country, subcontractor.zip_code, "
-                            "account.username, SUM(invoice.amount) "
+                    "subcontractor.city, subcontractor.state, "
+                    "subcontractor.country, subcontractor.zip_code, "
+                    "account.username, SUM(invoice.amount) "
                     "FROM subcontractor, invoice, account "
                     "WHERE subcontractor.id=:subcontractor_id "
-                        "AND invoice.subcontractor_id = subcontractor.id "
-                        "AND account.id = subcontractor.user_id "
-                        "GROUP BY subcontractor.company_name, subcontractor.street, "
-                                    "subcontractor.city, subcontractor.state,subcontractor.country, "
-                                    "subcontractor.zip_code,account.username").params(subcontractor_id=id)
+                    "AND invoice.subcontractor_id = subcontractor.id "
+                    "AND account.id = subcontractor.user_id "
+                    "GROUP BY subcontractor.company_name, subcontractor.street, "
+                    "subcontractor.city, subcontractor.state,subcontractor.country, "
+                    "subcontractor.zip_code,account.username").params(subcontractor_id=id)
 
         res = db.engine.execute(stmt)
         row = res.fetchone()
-        
+
         return {"company_name": row[0], 
                 "street": row[1],
                 "city": row[2],
