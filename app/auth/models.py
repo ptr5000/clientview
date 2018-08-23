@@ -30,18 +30,19 @@ class User(db.Model):
 
     @staticmethod
     def create_user(username, password, role=Roles.DEFAULT):
-        user = User(username, password)
+        user = User(username, password.encode("utf8"))
         db.session().add(user)
-        db.session().flush()
+        db.session().commit()
 
         db.session().add(Role(user.id, role))
         db.session().commit()
 
         return user
 
+
     def __init__(self, username, password):
         self.username = username
-        self.password = bcrypt.generate_password_hash(password, 8)
+        self.password = bcrypt.generate_password_hash(password, 8).decode("utf8")
 
 
     def validate_password(self, password):
