@@ -14,7 +14,7 @@ class Role(db.Model):
 
     def __init__(self, user_id, role):
         self.user_id = user_id
-        self.role = role
+        self.role = int(role)
 
 class User(db.Model):
     __tablename__ = "account"
