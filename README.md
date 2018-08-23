@@ -10,7 +10,9 @@ CRUD näkymät tulevat tämän kurssin puitteissa alihankkijatiedolle, työtilau
 Testitunnukset:
 
 admin - admin tunnuksella voi hallita tuotteita ja vastaanottaa laskuja
+
 testco - testco firman laskutustunnus
+
 acme - acme firman laskutustunnus
 
 Salasana kaikkiin on '1'
