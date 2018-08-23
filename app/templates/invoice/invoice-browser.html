@@ -25,16 +25,16 @@
             </thead>
             <tbody>
 
-            {% for po in orders.items %}
+            {% for order in orders.items %}
 
             <tr>
-                <th scope="row">{{po.id}}</th>
-                <td>{{po.product.description}}</td>
-                <td>{{po.order.created}}</td>
-                {% if not po.invoice %}
-                    <td><a href="{{po.id}}/new" class="btn btn-success btn-sm">Create Invoice</a></td>  
+                <th scope="row">{{order.id}}</th>
+                <td></td>
+                <td>{{order.created}}</td>
+                {% if not order.invoice %}
+                    <td><a href="{{order.id}}/new" class="btn btn-success btn-sm">Create Invoice</a></td>  
                 {% else %}
-                    <td><a href="{{po.id}}/" class="btn btn-primary btn-sm">View Invoice</a></td>
+                    <td><a href="{{order.id}}/" class="btn btn-primary btn-sm">View Invoice</a></td>
                 {% endif %}
 
                 <td></td>

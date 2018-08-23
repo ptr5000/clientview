@@ -73,14 +73,17 @@
                         </tr>
                       </thead>
                       <tbody>
+
+                        {% for po in products %}
                         <tr>
-                          <th scope="row">1</th>
-                          <td>
-                            <p>{{ invoice.note }} </p>
-                           </td>
-                          <td class="text-right">{{ invoice.amount }}€</td>
+                            <th scope="row">{{loop.index}}</th>
+                            <td>
+                            <p>{{ po.product.description }} </p>
+                            </td>
+                            <td class="text-right">{{ po.product.price }}€</td>
                         </tr>
-                        
+                        {% endfor %}
+                       
                       </tbody>
                     </table>
                   </div>
@@ -97,7 +100,7 @@
                           </tr>
                           <tr>
                             <td>TAX (0%)</td>
-                            <td class="text-right">0€ (reverse charge)</td>
+                            <td class="text-right">0€</td>
                           </tr>
                           <tr>
                             <td class="text-bold-800">Total</td>

@@ -32,13 +32,10 @@
             {% for order in orders.items %}
             <tr>
                 <th scope="row">{{order.id}}</th>
-                <td>{{order.order.cost_center.company_name}}</td>
-                <td>{{order.order.subcontractor.company_name}}</td>
+                <td>{{order.cost_center.company_name}}</td>
+                <td>{{order.subcontractor.company_name}}</td>
              
-                <td>{{order.product.description}}</td>
-                <td>{{order.product.price}}€</td>
-                
-                <td><a href="{{order.id}}">Edit</a></td>
+                <td><a href="{{order.id}}">View</a></td>
                 <td><a href="{{order.id}}/delete">Delete</a></td>
             </tr>
             {% endfor %}

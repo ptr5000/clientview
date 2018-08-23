@@ -2,7 +2,6 @@ from enum import IntEnum
 from app import db
 from app.models import BaseAddressModel
 
-
 class InvoiceStatus(IntEnum):
     pending = 0
     sent = 1
@@ -12,8 +11,8 @@ class Invoice(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     invoice_sender_details_id = db.Column(
         db.Integer, db.ForeignKey("invoice_sender_details.id"), nullable=False)
-    product_order_id = db.Column(
-        db.Integer, db.ForeignKey("product_order.id"), nullable=False, unique=True)
+    order_id = db.Column(
+        db.Integer, db.ForeignKey("orderinfo.id"), nullable=False, unique=True)
     cost_center_id = db.Column(
         db.Integer, db.ForeignKey("cost_center.id"), nullable=False)
     amount = db.Column(db.Integer, nullable=False)
@@ -38,10 +37,11 @@ class Invoice(db.Model):
 
 
     @staticmethod
-    def create_invoice_from_product_order(product_order):
+    def create_invoice(order):
         from app.subcontractor.models import Subcontractor
+        from app.order.models import ProductOrder
 
-        subcon = Subcontractor.query.filter_by(id=product_order.order.subcontractor_id).first()
+        subcon = Subcontractor.query.filter_by(id=order.subcontractor_id).first()
         sender_details = InvoiceSenderDetails(subcon)
 
         db.session().add(sender_details)
@@ -49,11 +49,12 @@ class Invoice(db.Model):
 
         invoice = Invoice()
         invoice.invoice_sender_details_id = sender_details.id
-        invoice.cost_center_id = product_order.order.cost_center_id
-        invoice.product_order_id = product_order.id
-        invoice.amount = product_order.product.price
+        invoice.cost_center_id = order.cost_center_id
+        invoice.order_id = order.id
+
+        
+        invoice.amount = order.get_total_sum()
         invoice.status = InvoiceStatus.pending
-        invoice.note = product_order.product.description
         invoice.paypal_address = subcon.paypal_address
 
         db.session().add(invoice)
