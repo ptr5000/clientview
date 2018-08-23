@@ -12,7 +12,7 @@ from app.utils import validate_and_populate_form_model, render_default_row_view
 def costcenter_browser():
     form = CostCenterForm(request.form)
 
-    cost_centers = CostCenter.query.paginate(max_per_page=5)
+    cost_centers = CostCenter.query.order_by(CostCenter.id.desc()).paginate(max_per_page=5)
 
     return render_template("costcenter/costcenter-browser.html",
                            form=form, cost_centers=cost_centers)
@@ -77,6 +77,7 @@ def _get_costcenter_or_abort(id):
         abort(404)
 
     return model
+
 
 def _create_cost_center_form_from_existing_data(id):
     model = _get_costcenter_or_abort(id)

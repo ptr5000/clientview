@@ -12,7 +12,7 @@ from app.utils import validate_and_populate_form_model, render_default_row_view
 def product_browser():
     form = ProductForm(request.form)
 
-    products = Product.query.paginate(max_per_page=5)
+    products = Product.query.order_by(Product.id.desc()).paginate(max_per_page=5)
 
     return render_template("product/product-browser.html",
                            form=form, products=products)
