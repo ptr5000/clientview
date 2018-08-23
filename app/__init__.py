@@ -13,7 +13,7 @@ if os.environ.get("HEROKU"):
 else:
     #app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///clientview.db"  
     app.config["SQLALCHEMY_DATABASE_URI"] = "postgresql://127.0.0.1:5432/pmuilu"  
-    app.config["SQLALCHEMY_ECHO"] = False
+    app.config["SQLALCHEMY_ECHO"] = True
 
 db = SQLAlchemy(app)
 
