@@ -11,7 +11,8 @@ bcrypt = Bcrypt(app)
 if os.environ.get("HEROKU"):
     app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get("DATABASE_URL")
 else:
-    app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///clientview.db"  
+    #app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///clientview.db"  
+    app.config["SQLALCHEMY_DATABASE_URI"] = "postgresql://127.0.0.1:5432/pmuilu"  
     app.config["SQLALCHEMY_ECHO"] = False
 
 db = SQLAlchemy(app)
