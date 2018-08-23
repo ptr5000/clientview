@@ -41,7 +41,7 @@ class User(db.Model):
 
     def __init__(self, username, password):
         self.username = username
-        self.password = bcrypt.generate_password_hash(password.encode("utf8"), 8).decode("utf8")
+        self.password = bcrypt.generate_password_hash(password, 8)
 
 
     def validate_password(self, password):
