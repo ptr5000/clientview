@@ -1,0 +1,33 @@
+{% extends "template.html" %}
+
+{% block body %}
+<div class="content-wrapper container-fluid px-5 mb-4 trans-03-in-out">
+
+  <div class="row">
+    <section class="widget shadow-01 mb-4" id="widget-03">
+            <div class="widget-block">
+                <h1>{{details.company_name}}</h1>
+                <div class="widget-content">
+                    <div class="form-group">
+                        <strong>Street</strong>
+                        <p>{{details.street}}</p>
+                        <strong>City</strong>
+                        <p>{{details.city}}</p>
+                        <strong>State</strong>
+                        <p>{{details.state}}</p>
+                        <strong>Country</strong>
+                        <p>{{details.country}}</p>
+                        <strong>Zip Code</strong>
+                        <p>{{details.zip_code}}</p>
+                        <strong>Username</strong>
+                        <p>{{details.username}}</p>
+                        <strong>Total Amount Invoiced</strong>
+                        <p>{{details.total_invoiced_amount}}€</p>
+                    </div>
+                </div>
+            </div>
+    </section>
+</div>
+
+{% endblock %}
+

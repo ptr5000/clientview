@@ -9,8 +9,10 @@ class InvoiceStatus(IntEnum):
 
 class Invoice(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    invoice_sender_details_id = db.Column(
-        db.Integer, db.ForeignKey("invoice_sender_details.id"), nullable=False)
+    sender_id = db.Column(
+        db.Integer, db.ForeignKey("invoice_sender.id"), nullable=False)
+    subcontractor_id = db.Column(
+        db.Integer, db.ForeignKey("subcontractor.id"), nullable=False)
     order_id = db.Column(
         db.Integer, db.ForeignKey("orderinfo.id"), nullable=False, unique=True)
     cost_center_id = db.Column(
@@ -24,7 +26,7 @@ class Invoice(db.Model):
                          onupdate=db.func.current_timestamp())
     paypal_address = db.Column(db.String(255), nullable=False)
     cost_center = db.relationship("CostCenter", lazy=True)
-    sender = db.relationship("InvoiceSenderDetails", lazy=True)
+    sender = db.relationship("InvoiceSender", lazy=True)
 
 
     def is_sent(self):
@@ -39,20 +41,18 @@ class Invoice(db.Model):
     @staticmethod
     def create_invoice(order):
         from app.subcontractor.models import Subcontractor
-        from app.order.models import ProductOrder
-
+        
         subcon = Subcontractor.query.filter_by(id=order.subcontractor_id).first()
-        sender_details = InvoiceSenderDetails(subcon)
+        sender_details = InvoiceSender(subcon)
 
         db.session().add(sender_details)
         db.session().flush()
 
         invoice = Invoice()
-        invoice.invoice_sender_details_id = sender_details.id
+        invoice.sender_id = sender_details.id
+        invoice.subcontractor_id = subcon.id
         invoice.cost_center_id = order.cost_center_id
         invoice.order_id = order.id
-
-        
         invoice.amount = order.get_total_sum()
         invoice.status = InvoiceStatus.pending
         invoice.paypal_address = subcon.paypal_address
@@ -63,7 +63,7 @@ class Invoice(db.Model):
         return invoice
 
 
-class InvoiceSenderDetails(BaseAddressModel):
+class InvoiceSender(BaseAddressModel):
     """
     Invoice sender details at the time when invoice was sent.
     """

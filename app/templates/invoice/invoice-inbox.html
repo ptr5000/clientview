@@ -32,7 +32,7 @@
             <tr>
                 <th scope="row">{{invoice.id}}</th>
                 <td>{{invoice.sent_date}}</td>
-                <td>{{invoice.sender.company_name}}</td>
+                <td><a href="{{ url_for('subcontractor_get_details', id=invoice.subcontractor_id)}}">{{invoice.sender.company_name}}</a></td>
                 <td>{{invoice.cost_center.company_name}}</td>
                 <td>{{invoice.amount}}&euro;</td>
 
