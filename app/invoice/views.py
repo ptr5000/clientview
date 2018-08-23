@@ -75,6 +75,7 @@ def _get_orders_with_invoices(subcontractor_id):
     return (Order.query
             .join(ProductOrder)
             .outerjoin((Invoice, Invoice.order_id == Order.id))
+            .order_by(Order.id.desc())
             .filter(Order.subcontractor_id == subcontractor_id))
 
 def _get_subcontractor_or_force_to_add_details():

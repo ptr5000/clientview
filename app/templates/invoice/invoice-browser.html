@@ -13,14 +13,15 @@
             <p class="text-muted">
                 Add or edit new invoice
             </p>
+        </header>
         <div class="widget-content py-3">
             <table class="table">
             <thead>
             <tr>
                 <th>Id</th>
-                <th>Product</th>
-                <th>Created</th>
-                 <th></th>
+                <th>Order From</th>
+                <th>Date</th>
+                <th>Total</th>
             </tr>
             </thead>
             <tbody>
@@ -29,8 +30,9 @@
 
             <tr>
                 <th scope="row">{{order.id}}</th>
-                <td></td>
+                <td>{{order.cost_center.company_name}}</td>
                 <td>{{order.created}}</td>
+                <td>{{order.get_total_sum()}}€</td>
                 {% if not order.invoice %}
                     <td><a href="{{order.id}}/new" class="btn btn-success btn-sm">Create Invoice</a></td>  
                 {% else %}

@@ -1,1 +1,24 @@
-{% include "default-form-standalone.html" %}
+{% extends "template.html" %}
+
+{% block body %}
+<div class="content-wrapper container-fluid px-5 mb-4 trans-03-in-out">
+
+  <div class="row">
+    <section class="widget shadow-01 mb-4" id="widget-03">
+        <div class="widget-block">
+            <header>
+                <h3>Your Invoicing Details</h3>
+                <p class="text-muted">
+                    Please add your invoicing details. These will be used in automatically generated invoices.
+                </p>
+            </header>
+        </div>
+        {% include "default-form.html" %}
+    </div>
+    </section>
+</div>
+    
+{% endblock %}
+
+
+
