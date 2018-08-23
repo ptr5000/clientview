@@ -63,7 +63,7 @@ def product_suppliers(id=None):
                            suppliers=product.get_all_suppliers())
 
 
-@app.route('/product/<id>', methods=["POST"])
+@app.route('/product/<id>/edit', methods=["POST"])
 @login_required(Roles.ADMIN)
 def product_perform_update(id=None):
     model = _get_product_or_abort(id)

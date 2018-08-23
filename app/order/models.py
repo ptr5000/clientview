@@ -9,8 +9,11 @@ class Order(db.Model):
     status = db.Column(db.Integer, nullable=False)
     subcontractor_id = db.Column(
         db.Integer, db.ForeignKey("subcontractor.id"), nullable=False)
-    cost_center_id = db.Column(
-        db.Integer, db.ForeignKey("cost_center.id"), nullable=False)
+    cost_center_id = db.Column(db.Integer,
+                               db.ForeignKey("cost_center.id",
+                                             onupdate="CASCADE",
+                                             ondelete="CASCADE"),
+                                nullable=False)
     created = db.Column(db.DateTime, default=db.func.current_timestamp())
     subcontractor = db.relationship("Subcontractor")
     cost_center = db.relationship("CostCenter")
@@ -28,9 +31,15 @@ class Order(db.Model):
 
 class ProductOrder(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    product_id = db.Column(
-        db.Integer, db.ForeignKey("product.id"), nullable=False)
-    order_id = db.Column(
-        db.Integer, db.ForeignKey("orderinfo.id"), nullable=False)
-    product = db.relationship("Product")
+    product_id = db.Column(db.Integer,
+                           db.ForeignKey("product.id",
+                                         onupdate="CASCADE",
+                                         ondelete="CASCADE"),
+                           nullable=False)
+    order_id = db.Column(db.Integer,
+                         db.ForeignKey("orderinfo.id",
+                                       onupdate="CASCADE",
+                                       ondelete="CASCADE"),
+                         nullable=False)
+    product = db.relationship("Product", cascade="delete")
     order = db.relationship(Order)
