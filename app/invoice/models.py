@@ -34,7 +34,7 @@ class Invoice(db.Model):
 
 
     def send(self):
-        self.status = InvoiceStatus.sent
+        self.status = int(InvoiceStatus.sent)
         db.session().commit()
 
 
@@ -54,7 +54,7 @@ class Invoice(db.Model):
         invoice.cost_center_id = order.cost_center_id
         invoice.order_id = order.id
         invoice.amount = order.get_total_sum()
-        invoice.status = InvoiceStatus.pending
+        invoice.status = int(InvoiceStatus.pending)
         invoice.paypal_address = subcon.paypal_address
 
         db.session().add(invoice)
