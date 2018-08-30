@@ -35,12 +35,11 @@ Sovellukseen luodaan automaattisesti seuraavat testitunnukset. Kaikkien salasana
 
 ## Sovelluksen rajoitteet ja puuttuvat ominaisuudet
 
-Sovellus hieman oikoo tuotteen hinnan suhteen niin, että se määritellään 
-tilaajan toimesta. Todellisuudessa olisi hyvä, että alihankkijat voisivat määritellä tuotteelle hinnan jonka perusteella sitten laskettaisiin ostotarjous tai vaihtoehtoisesti valittaisiin halvin toimittaja tarjouskilpailussa. 
-Nyt yksinkertaistuksen vuoksi alihankkija valitaan suoraan eikä tarjous lähde "kaikille". Oletamme siis, että
-alihankkijan kanssa on sovittu tilaus jo etukäteen esim. puhelimessa ja järjestelmä on enemmänkin vain ns. dokumentaation 
+Sovellus olettaa, että alihankkijan kanssa on sovittu tilaus jo etukäteen esim. puhelimessa ja järjestelmä on enemmänkin vain ns. dokumentaation 
 tekemiseen (PO:n ja laskun).
 
+- Kentistä puuttuu jonkin verran oikeaa validointia, esim VAT-numeroa ei tarkisteta onko se oikeassa muodossa tai löytyykö se VIES-kannasta. 
+- Tilauksen status ei nyt oikein välity, eli alihankkijalla pitäisi olla joku mahdollisuus ottaa vaikka tilaus käsittelyyn.
 
 ## Tietokanta
 
