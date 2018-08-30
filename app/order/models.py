@@ -35,11 +35,13 @@ class ProductOrder(db.Model):
                            db.ForeignKey("product.id",
                                          onupdate="CASCADE",
                                          ondelete="CASCADE"),
-                           nullable=False)
+                           nullable=False,
+                           index=True)
     order_id = db.Column(db.Integer,
                          db.ForeignKey("orderinfo.id",
                                        onupdate="CASCADE",
                                        ondelete="CASCADE"),
-                         nullable=False)
+                         nullable=False,
+                         index=True)
     product = db.relationship("Product", cascade="delete")
     order = db.relationship(Order)

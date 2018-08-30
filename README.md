@@ -22,6 +22,7 @@ Salasana kaikkiin on '1'
 
 - [Tietokantakaavio](https://raw.githubusercontent.com/ptr5000/clientview/master/docs/clientview.png)
 - [Käyttäjätarinat](https://github.com/ptr5000/clientview/blob/master/docs/tarinat.md)
+- [Asennus- ja käyttöohje](https://github.com/ptr5000/clientview/blob/master/docs/kayttoohje.md)
 
 
 
