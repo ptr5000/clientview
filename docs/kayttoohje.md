@@ -21,16 +21,16 @@ voidaan hallita omia tietoja ja lähettää laskuja tilauksista.
 
 ### Uuden tunnuksen luominen
 
-    1. Rekisteröidy palveluun uudella käyttäjätunnuksella
-    2. Määrittele yrityksen tiedot 
+1. Rekisteröidy palveluun uudella käyttäjätunnuksella
+2. Määrittele yrityksen tiedot 
 
-    Tunnus on nyt valmis lähettämään laskuja. 
+Tunnus on nyt valmis lähettämään laskuja. 
 
 ### Laskun lähettäminen
 
-    1. Valitse vasemmalta näkymä "Send Invoices"
-    2. Näet listan tilauksista (jos et näe tilauksia, tee ensiksi tilaus seuraamalla ohjeita kohdassa "Tilauksen tekeminen Admin -tunnuksella")
-    3. Luo tilauksesta lasku valitsemalla "Create new invoice" ja paina laskun esikatselunäkymässä "Send invoice" -nappia. 
+1. Valitse vasemmalta näkymä "Send Invoices"
+2. Näet listan tilauksista (jos et näe tilauksia, tee ensiksi tilaus seuraamalla ohjeita kohdassa "Tilauksen tekeminen Admin -tunnuksella")
+3. Luo tilauksesta lasku valitsemalla "Create new invoice" ja paina laskun esikatselunäkymässä "Send invoice" -nappia. 
 
 ## Tilauksen tekeminen Admin -tunnuksella
 
