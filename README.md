@@ -10,7 +10,7 @@ CRUD näkymät tulevat tämän kurssin puitteissa alihankkijatiedolle, työtilau
 ## Toteutunut projekti
 
 Todellisuudessa sovellus on kurssia varten hieman erilainen kuin alunperin oli tarkoitus. Alkuperäinen ajatus oli liian yksinkertainen, koska
-käytännössä esimerkiksi kirjautumista, rekisteröitymistä ym. ei olisi tarvittu. Yhteenvetoja ei myöskään oikeastaan tarvita joten ne on tehty kurssia varten erikseen. Lopputulos on kuitenkin pieni ja näppärä tilausten sekä laskujen hallinnointisovellus joka voidaan 
+käytännössä esimerkiksi kirjautumista, rekisteröitymistä ym. ei olisi tarvittu. Lopputulos on kuitenkin pieni ja näppärä tilausten sekä laskujen hallinnointisovellus joka voidaan 
 muuttaa alkuperäisen tavoitteen mukaiseksi pienellä vaivalla. 
 
 Sovellus mahdollistaa tilausten teon tuotteista jotka ovat määritelty kantaan ennalta. Tämän pohjalta alihankkija joka tuotteet toimittaa,
