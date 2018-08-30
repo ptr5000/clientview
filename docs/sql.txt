@@ -1,0 +1,128 @@
+
+CREATE TABLE account (
+	id SERIAL NOT NULL,
+	created TIMESTAMP WITHOUT TIME ZONE,
+	modified TIMESTAMP WITHOUT TIME ZONE,
+	name VARCHAR(144),
+	username VARCHAR(144) NOT NULL,
+	password VARCHAR(144) NOT NULL,
+	PRIMARY KEY (id),
+	UNIQUE (username)
+)
+
+
+
+CREATE TABLE cost_center (
+	company_name VARCHAR(255) NOT NULL,
+	street VARCHAR(255) NOT NULL,
+	city VARCHAR(255) NOT NULL,
+	state VARCHAR(255),
+	country VARCHAR(255) NOT NULL,
+	zip_code VARCHAR(255) NOT NULL,
+	id SERIAL NOT NULL,
+	vat_code VARCHAR(255) NOT NULL,
+	PRIMARY KEY (id)
+)
+
+
+
+CREATE TABLE invoice_sender (
+	company_name VARCHAR(255) NOT NULL,
+	street VARCHAR(255) NOT NULL,
+	city VARCHAR(255) NOT NULL,
+	state VARCHAR(255),
+	country VARCHAR(255) NOT NULL,
+	zip_code VARCHAR(255) NOT NULL,
+	id SERIAL NOT NULL,
+	vat_code VARCHAR(255) NOT NULL,
+	created TIMESTAMP WITHOUT TIME ZONE,
+	PRIMARY KEY (id)
+)
+
+
+
+CREATE TABLE product (
+	id SERIAL NOT NULL,
+	description VARCHAR(255),
+	price INTEGER NOT NULL,
+	PRIMARY KEY (id)
+)
+
+
+
+CREATE TABLE role (
+	id SERIAL NOT NULL,
+	user_id INTEGER NOT NULL,
+	role INTEGER NOT NULL,
+	PRIMARY KEY (id),
+	FOREIGN KEY(user_id) REFERENCES account (id)
+)
+
+
+
+CREATE TABLE subcontractor (
+	company_name VARCHAR(255) NOT NULL,
+	street VARCHAR(255) NOT NULL,
+	city VARCHAR(255) NOT NULL,
+	state VARCHAR(255),
+	country VARCHAR(255) NOT NULL,
+	zip_code VARCHAR(255) NOT NULL,
+	id SERIAL NOT NULL,
+	user_id INTEGER NOT NULL,
+	vat_code VARCHAR(255) NOT NULL,
+	paypal_address VARCHAR(255) NOT NULL,
+	PRIMARY KEY (id),
+	FOREIGN KEY(user_id) REFERENCES account (id)
+)
+
+
+CREATE INDEX ix_subcontractor_user_id ON subcontractor (user_id)
+
+CREATE TABLE orderinfo (
+	id SERIAL NOT NULL,
+	status INTEGER NOT NULL,
+	subcontractor_id INTEGER NOT NULL,
+	cost_center_id INTEGER NOT NULL,
+	created TIMESTAMP WITHOUT TIME ZONE,
+	PRIMARY KEY (id),
+	FOREIGN KEY(subcontractor_id) REFERENCES subcontractor (id),
+	FOREIGN KEY(cost_center_id) REFERENCES cost_center (id) ON DELETE CASCADE ON UPDATE CASCADE
+)
+
+
+
+CREATE TABLE invoice (
+	id SERIAL NOT NULL,
+	sender_id INTEGER NOT NULL,
+	subcontractor_id INTEGER NOT NULL,
+	order_id INTEGER NOT NULL,
+	cost_center_id INTEGER NOT NULL,
+	amount INTEGER NOT NULL,
+	status INTEGER NOT NULL,
+	note VARCHAR(255),
+	sent_date TIMESTAMP WITHOUT TIME ZONE,
+	paid_date TIMESTAMP WITHOUT TIME ZONE,
+	modified TIMESTAMP WITHOUT TIME ZONE,
+	paypal_address VARCHAR(255) NOT NULL,
+	PRIMARY KEY (id),
+	FOREIGN KEY(sender_id) REFERENCES invoice_sender (id),
+	FOREIGN KEY(subcontractor_id) REFERENCES subcontractor (id),
+	UNIQUE (order_id),
+	FOREIGN KEY(order_id) REFERENCES orderinfo (id),
+	FOREIGN KEY(cost_center_id) REFERENCES cost_center (id)
+)
+
+
+
+CREATE TABLE product_order (
+	id SERIAL NOT NULL,
+	product_id INTEGER NOT NULL,
+	order_id INTEGER NOT NULL,
+	PRIMARY KEY (id),
+	FOREIGN KEY(product_id) REFERENCES product (id) ON DELETE CASCADE ON UPDATE CASCADE,
+	FOREIGN KEY(order_id) REFERENCES orderinfo (id) ON DELETE CASCADE ON UPDATE CASCADE
+)
+
+
+CREATE INDEX ix_product_order_product_id ON product_order (product_id)
+CREATE INDEX ix_product_order_order_id ON product_order (order_id)
