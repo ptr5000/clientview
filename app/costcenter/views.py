@@ -54,7 +54,7 @@ def costcenter_perform_delete(id=None):
     return redirect(url_for("costcenter_browser"))
 
 
-@app.route('/costcenter/<id>', methods=["POST"])
+@app.route('/costcenter/<id>/edit', methods=["POST"])
 @login_required(Roles.ADMIN)
 def costcenter_perform_update(id=None):
     model = _get_costcenter_or_abort(id)
