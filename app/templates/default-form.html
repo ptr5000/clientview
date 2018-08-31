@@ -1,10 +1,17 @@
 <div class="widget-block">
         <div class="widget-content">
-            {% for field, errors in form.errors.items() %}
-            <div class="alert alert-error">
-                {{ form[field].label }}: {{ ', '.join(errors) }}
-            </div>
-            {% endfor %}
+           
+            {% if form.errors %}
+                {% for field, errors in form.errors.items() %}
+                <div class="alert alert-error">
+                    {{ form[field].label }}: {{ ', '.join(errors) }}
+                </div>
+                {% endfor %}
+            {% else %}
+                {% if request.method == "POST" %}
+                    <div class="alert alert-success">Update successful</div>
+                {% endif %}
+            {% endif %}
             
             <form action="{{action}}"
                     method="post">
