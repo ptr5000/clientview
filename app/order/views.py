@@ -96,5 +96,10 @@ def _add_product_order_to_db(form, order_id):
 
 def _get_product_orders_and_their_total_sum(order_id):
     products = ProductOrder.query.filter_by(order_id=order_id)
-    total_sum = reduce(lambda sum, po: sum+po.product.price, products, 0)
+
+    try:
+        total_sum = reduce(lambda sum, po: sum+po.product.price, products, 0)
+    except AttributeError:
+        total_sum = 0
+
     return products, total_sum
