@@ -2,13 +2,13 @@
 # Käyttäjätarinat
 
 
---
+---
 
 Pääkäyttäjän tulee olla mahdollista määritellä tuotteet jotka sitten tilataan valituilta alihankkijoilta. 
 Tuote tässä tapauksessa voi olla esimerkiksi työsuorite tai fyysinen asia. Tarkoitus on, että alihankkijat
 eivät määrittele tuotteita vaan tilaaja määrittelee yhteiset nimet suoritteille tai asioille. 
 
---
+---
 
 Pääkäyttäjän tulee pystyä määrittelemään tuotteille hinnat. Hinta on tässä tapauksessa se hinta, joka on sovittu
 alihankkijan kanssa erikseen. Sopiminen ei tapahdu käyttöliittymässä.
@@ -25,8 +25,12 @@ ne voidaan kopioida laskulle aina automaattisesti kun alihankkija luo laskua.
 
 ---
 
-Alihankkijan tulee nähdä tilaukset yhdessä näkymässä ja luomaan lasku valitusta tilauksesta. Lasku tulee
-pystyä lähettämään helposti yhdellä klikkauksella. 
+Alihankkijan tulee nähdä tilaukset yhdessä näkymässä ja luomaan lasku valitusta tilauksesta. 
+
+---
+
+Alihankkijan tulee pystyä lähettämään lasku helposti yhdellä klikkauksella sillä tiedot laskulla ovat
+jo valmiiksi olemassa. 
 
 ---
 

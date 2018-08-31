@@ -27,7 +27,7 @@ login_manager.login_message = "Please login to use this functionality."
 from app import views
 
 from os import urandom
-app.config["SECRET_KEY"] = "fsdJVdfjgdfR5454"
+app.config["SECRET_KEY"] = urandom(32)
 
 login_manager = LoginManager()
 login_manager.init_app(app)
